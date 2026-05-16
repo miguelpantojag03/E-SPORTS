@@ -14,6 +14,13 @@ public interface IRepository<T> {
     List<T> findAll();
     Optional<T> findById(String id);
     void delete(String id);
+    
+    // Programación Funcional: Filtrado avanzado
+    default List<T> filter(java.util.function.Predicate<T> predicate) {
+        return findAll().stream()
+                .filter(predicate)
+                .collect(java.util.stream.Collectors.toList());
+    }
 }
 
 /**
